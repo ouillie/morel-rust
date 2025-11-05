@@ -33,6 +33,9 @@ pub struct MorelShell(Shell);
 impl MorelShell {
     #[wasm_bindgen(constructor)]
     pub fn new() -> Self {
+        // Set up panic hook for better error messages in the browser console.
+        console_error_panic_hook::set_once();
+
         // In Wasm, we can't use filesystem operations like current_dir(),
         // so we need `Shell::with_config` instead of `Shell::new`.
         let config = Config::default();
